@@ -12,9 +12,28 @@ public:
   Operation() { cout << "Called Operation constructor\n"; }
   Operation(Operation const &) = default;
   Operation &operator=(Operation &&) = default;
-  ~Operation() = default;
+  ~Operation() { cout << "Called Operation destructor\n"; }
 
+  // This makes the Operation class pure virtual
   virtual std::vector<T> forward(std::vector<T>) = 0;
+};
+
+class OperationList {
+private:
+  // Pointer of base class points to an object of a derived class.
+  vector<Operation *> list;
+
+public:
+  OperationList(initializer_list<Operation *> list) { this->list = list; }
+
+  vector<T> forward(vector<T> input) {
+    vector<T> x = input;
+    for (auto &it : list)
+      x = it->forward(x);
+    return x;
+  }
+
+  void push_back(Operation *op) { list.push_back(op); }
 };
 
 class Increment : public Operation {
@@ -35,7 +54,7 @@ public:
   }
 
   // Move constructor
-  Increment &operator=(Increment &other) {
+  Increment &operator=(const Increment &other) {
     cout << "Called Increment move constructor\n";
 
     if (this == &other)
@@ -46,9 +65,7 @@ public:
   }
 
   // Destructor
-  ~Increment() {
-    cout << "Called Increment destructor\n";
-  }
+  ~Increment() { cout << "Called Increment destructor\n"; }
 
   std::vector<T> forward(std::vector<T> input) override {
     cout << "Called Increment forward function\n";
@@ -102,21 +119,6 @@ public:
   }
 };
 
-class OperationList {
-private:
-  vector<Operation *> list;
-
-public:
-  OperationList(initializer_list<Operation *> list) { this->list = list; }
-
-  vector<T> forward(vector<T> input) {
-    vector<T> x = input;
-    for (auto &it : list)
-      x = it->forward(x);
-    return x;
-  }
-};
-
 vector<T> getRandomVector(int size = 0) {
   std::srand(unsigned(std::time(nullptr)));
   std::vector<T> v(size);
@@ -137,6 +139,8 @@ int main() {
       new Normalize(), new ReLU(), new Increment(),
       new Normalize(), new ReLU(), new Increment(42),
   };
+
+  net.push_back(new Increment(1));
 
   vector<T> vec = getRandomVector(10);
   vector<T> out;
