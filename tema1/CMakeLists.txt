@@ -13,4 +13,9 @@ else()
     endif()
 endif()
 
-add_executable(${CMAKE_PROJECT_NAME} net.cpp)
+include_directories(include/)
+
+add_executable(${CMAKE_PROJECT_NAME}
+    src/utils.cpp
+    src/net.cpp
+)

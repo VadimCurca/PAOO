@@ -1,8 +1,9 @@
 #include <algorithm>
 #include <cstdlib>
-#include <ctime>
 #include <iostream>
 #include <vector>
+
+#include <utils.h>
 
 using namespace std;
 
@@ -118,21 +119,6 @@ public:
     return out;
   }
 };
-
-vector<T> getRandomVector(int size = 0) {
-  std::srand(unsigned(std::time(nullptr)));
-  std::vector<T> v(size);
-  std::generate(v.begin(), v.end(), std::rand);
-
-  return v;
-}
-
-void printVector(vector<T> &vec) {
-  for (auto it : vec) {
-    cout << it << ' ';
-  }
-  cout << "\n";
-}
 
 int main() {
   OperationList net{
