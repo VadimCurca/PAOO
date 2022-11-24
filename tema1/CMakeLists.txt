@@ -16,6 +16,8 @@ endif()
 include_directories(include/)
 
 add_executable(${CMAKE_PROJECT_NAME}
+    src/ops.cpp
+    src/OperationList.cpp
     src/utils.cpp
     src/net.cpp
 )
