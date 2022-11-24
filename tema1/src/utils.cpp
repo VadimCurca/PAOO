@@ -4,18 +4,17 @@
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
+#include <typedef.h>
 
-typedef int Type;
-
-std::vector<Type> getRandomVector(int size) {
+std::vector<T> getRandomVector(int size) {
   std::srand(unsigned(std::time(nullptr)));
-  std::vector<Type> v(size);
+  std::vector<T> v(size);
   std::generate(v.begin(), v.end(), std::rand);
 
   return v;
 }
 
-void printVector(std::vector<Type> &vec) {
+void printVector(std::vector<T> &vec) {
   for (auto it : vec) {
     std::cout << it << ' ';
   }

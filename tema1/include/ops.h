@@ -14,7 +14,7 @@ private:
 public:
   // Constructor
   Increment(T val = 1) {
-    cout << "Called Increment constructor\n";
+    cout << "Called Increment constructor - " + name + "\n";
     this->incrementVal = val;
   }
 
@@ -31,6 +31,7 @@ public:
     if (this == &other)
       return *this;
 
+    this->name = other.name;
     this->incrementVal = other.incrementVal;
     return *this;
   }
@@ -43,7 +44,7 @@ public:
 
 class ReLU : public Operation {
 public:
-  ReLU() { cout << "Called ReLU constructor\n"; }
+  ReLU() { cout << "Called ReLU constructor - " + name + "\n"; }
   ReLU(ReLU const &) = delete;
   ReLU &operator=(ReLU &&) = delete;
   ~ReLU() = default;
@@ -53,7 +54,7 @@ public:
 
 class Normalize : public Operation {
 public:
-  Normalize() { cout << "Called Normalize constructor\n"; }
+  Normalize() { cout << "Called Normalize constructor - " + name + "\n"; }
   Normalize(ReLU const &) = delete;
   Normalize &operator=(Normalize &&) = delete;
   ~Normalize() = default;

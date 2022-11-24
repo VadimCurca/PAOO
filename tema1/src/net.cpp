@@ -30,4 +30,7 @@ int main() {
   Increment b(a);
   Increment c;
   c = a;
+
+  cout << "c name - " << c.name << "\n";
+  cout << "a name - " << a.name << "\n";
 }
