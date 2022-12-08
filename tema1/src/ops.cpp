@@ -3,6 +3,7 @@
 #include <ops.h>
 #include <typedef.h>
 #include <vector>
+#include <memory>
 
 std::vector<T> Increment::forward(std::vector<T> input) {
   std::cout << "Called Increment forward function\n";
@@ -37,4 +38,16 @@ std::vector<T> Normalize::forward(std::vector<T> input) {
     out[i] = input[i] - med;
 
   return out;
+}
+
+std::shared_ptr<Operation> getIncrementOp(T val) {
+  return std::shared_ptr<Operation>(new Increment(val));
+}
+
+std::shared_ptr<Operation> getReLUOp() {
+  return std::shared_ptr<Operation>(new ReLU());
+}
+
+std::shared_ptr<Operation> getNormalizeOp() {
+  return std::shared_ptr<Operation>(new Normalize());
 }

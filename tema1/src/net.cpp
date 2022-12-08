@@ -11,11 +11,10 @@
 
 int main() {
   OperationList net{
-      new Normalize(), new ReLU(), new Increment(),
-      new Normalize(), new ReLU(), new Increment(42),
+      getNormalizeOp(), getReLUOp(), getIncrementOp()
   };
 
-  net.push_back(new Increment(1));
+  net.push_back(getNormalizeOp());
 
   vector<T> vec = getRandomVector(10);
   vector<T> out;
@@ -33,4 +32,8 @@ int main() {
 
   cout << "c name - " << c.name << "\n";
   cout << "a name - " << a.name << "\n";
+
+  cout << "----------------------------------------\n";
+  cout << "----------End of main function----------\n";
+  cout << "----------------------------------------\n";
 }

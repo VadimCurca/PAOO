@@ -5,7 +5,7 @@
 
 std::vector<T> OperationList::forward(std::vector<T> input) {
   std::vector<T> x = input;
-  for (auto &it : list)
+  for (auto it : list)
     x = it->forward(x);
   return x;
 }

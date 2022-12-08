@@ -4,6 +4,7 @@
 #include <iostream>
 #include <typedef.h>
 #include <vector>
+#include <memory>
 
 using namespace std;
 
@@ -37,7 +38,7 @@ public:
   }
 
   // Destructor
-  ~Increment() { cout << "Called Increment destructor\n"; }
+  ~Increment() { cout << "Called Increment destructor - " + name + "\n"; }
 
   std::vector<T> forward(std::vector<T> input) override;
 };
@@ -47,7 +48,8 @@ public:
   ReLU() { cout << "Called ReLU constructor - " + name + "\n"; }
   ReLU(ReLU const &) = delete;
   ReLU &operator=(ReLU &&) = delete;
-  ~ReLU() = default;
+  // Destructor
+  ~ReLU() { cout << "Called ReLU destructor - " + name + "\n"; }
 
   std::vector<T> forward(std::vector<T> input) override;
 };
@@ -57,7 +59,11 @@ public:
   Normalize() { cout << "Called Normalize constructor - " + name + "\n"; }
   Normalize(ReLU const &) = delete;
   Normalize &operator=(Normalize &&) = delete;
-  ~Normalize() = default;
+  ~Normalize() { cout << "Called Normalize destructor - " + name + "\n"; }
 
   std::vector<T> forward(std::vector<T> input) override;
 };
+
+std::shared_ptr<Operation> getIncrementOp(T val = 1);
+std::shared_ptr<Operation> getReLUOp();
+std::shared_ptr<Operation> getNormalizeOp();
