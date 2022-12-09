@@ -32,3 +32,5 @@
 *.app
 
 [Bb]uild/
+[Bb]in
+.vscode
